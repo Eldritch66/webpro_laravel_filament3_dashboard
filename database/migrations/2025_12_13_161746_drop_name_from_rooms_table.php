@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('room_id')->nullable();
-            $table->string('img')->nullable();
-            $table->string('location')->required();
+        Schema::table('rooms', function (Blueprint $table) {
+            $table->dropColumn('name');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::table('rooms', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -35,15 +35,18 @@ class RoomResource extends Resource
                 ->visibility('public')
                 ->nullable(),
 
-            Forms\Components\TextInput::make('name')
-                ->label('Nama Hotel')
-                ->required(),
-
-
             Forms\Components\TextInput::make('location')
                 ->label('Lokasi')
                 ->required(),
-
+            Forms\Components\TextInput::make('capacity')
+                ->label('Kapasitas')
+                ->numeric()
+                ->required(),
+            Forms\Components\TextInput::make('price')
+                ->label('Harga')
+                ->numeric()
+                ->prefix('Rp')
+                ->required()
         ]);
     }
 
@@ -51,18 +54,23 @@ class RoomResource extends Resource
             {
         return $table->columns([
             Tables\Columns\ImageColumn::make('img')
-                ->label('Foto')
+                ->label(' ')
                 ->disk('public')
                 ->size(60),
 
             TextColumn::make('room_id')
-                ->label('ID Kamar'),
-
-            TextColumn::make('name')
-                ->label('Nama Hotel'),
-
+                ->label('Kamar'),
+                
+            TextColumn::make('capacity')
+                    ->label('Kapasitas'),
+                                
+            TextColumn::make('price')
+                ->label('Harga')
+                ->money('IDR'),
+                
             TextColumn::make('location')
                 ->label('Lokasi'),
+                
         ])
             
             ->filters([
